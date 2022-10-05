@@ -1,11 +1,7 @@
-package Trabajo3.ServidorUDP;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Scanner;
-
-import Trabajo3.Pixel.Pixel;
 
 import java.awt.*;
 
@@ -32,33 +28,19 @@ public class ServidorUDP {
             int puertoCliente = peticion.getPort();
             InetAddress direccion = peticion.getAddress();
 
-            System.out.println("Tu resolución es de " + screenSize.width + "x" + screenSize.height);
-            do {
-                System.out.println("Escriba la coordenada X del pixel que desea monitorear.");
-                x = teclado.nextInt();
-            } while (0 >= x && x <= screenSize.width);
-            do {
-                System.out.println("Escriba la coordenada Y del pixel que desea monitorear.");
-                y = teclado.nextInt();
-            } while (0 >= y && y <= screenSize.height);
-            System.out.println("El pixel que va a monitorear es: " + x + "," + y);
-
             while (true) {
                 socketUDP.receive(peticion);
-                String color = new String(peticion.getData());
-                Pixel pixel = new Pixel();
-                color = pixel.PixelColor(x, y);
-                buffer = color.getBytes();
-                DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, direccion, puertoCliente);
-                socketUDP.send(respuesta);
+                for (x = 500; x < 511; x++) {
+                    for (y = 500; y < 511; y++) {
+                        String color = new String(peticion.getData());
+                        Pixel pixel = new Pixel();
+                        color = pixel.PixelColor(x, y);
+                        buffer = color.getBytes();
+                        DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, direccion, puertoCliente);
+                        socketUDP.send(respuesta);
 
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    }
                 }
-
             }
         } catch (Exception e) {
             System.out.println("Error Catastrofico :c");
