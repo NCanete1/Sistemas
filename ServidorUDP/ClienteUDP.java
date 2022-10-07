@@ -10,8 +10,8 @@ import javax.swing.*;
 public class ClienteUDP extends JFrame {
   
     public static void main(String[] args) {
-        int row=10;
-        int col=10;
+        int row=3;
+        int col=3;
         JFrame frame = new JFrame("Cliente");
         int puerto_servidor = 2525;
         byte[] buffer = new byte[1024];
@@ -31,8 +31,8 @@ public class ClienteUDP extends JFrame {
             JPanel Ppanel = new JPanel(new GridLayout(row, col, 1, 1));
             while (true) {
                 
-                for (int i = 0; i < row; i++) {
-                    for (int j = 0; j < col; j++) {
+                for (int i = 0; i < grid.length; i++) {
+                    for (int j = 0; j < grid[0].length; j++) {
                         // "Limpia" el buffer
                         mensaje = "             ";
                         buffer = mensaje.getBytes();

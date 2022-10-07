@@ -13,7 +13,7 @@ public class ServidorUDP {
 
         Scanner teclado = new Scanner(System.in);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x, y;
+        
 
         try {
             System.out.println("Servidor UDP: Iniciado!");
@@ -30,8 +30,8 @@ public class ServidorUDP {
 
             while (true) {
                 socketUDP.receive(peticion);
-                for (x = 500; x < 511; x++) {
-                    for (y = 500; y < 511; y++) {
+                for (int y = 650; y < 653; y++) {
+                    for (int x = 400; x < 403; x++) {
                         String color = new String(peticion.getData());
                         Pixel pixel = new Pixel();
                         color = pixel.PixelColor(x, y);
